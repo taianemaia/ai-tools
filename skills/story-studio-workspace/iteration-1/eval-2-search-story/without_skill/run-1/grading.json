@@ -1,0 +1,40 @@
+{
+  "summary": {
+    "pass_rate": 0.5,
+    "passed": 3,
+    "failed": 3,
+    "total": 6
+  },
+  "expectations": [
+    {
+      "text": "Contains APPROVED STORY header block",
+      "passed": false,
+      "evidence": "Not found"
+    },
+    {
+      "text": "Story follows As a / I want / so that format",
+      "passed": false,
+      "evidence": "Missing Story: As a format"
+    },
+    {
+      "text": "No Given/When/Then in acceptance criteria",
+      "passed": false,
+      "evidence": "Given/When/Then detected \u2717"
+    },
+    {
+      "text": "Acceptance criteria more specific than the original vague story",
+      "passed": true,
+      "evidence": "Contains concrete technical detail"
+    },
+    {
+      "text": "INVEST Note present",
+      "passed": true,
+      "evidence": "Found"
+    },
+    {
+      "text": "Story Points with justification present",
+      "passed": true,
+      "evidence": "Found"
+    }
+  ]
+}

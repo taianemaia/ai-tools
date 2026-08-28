@@ -1,0 +1,60 @@
+{
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 10,
+    "failed": 0,
+    "total": 10
+  },
+  "expectations": [
+    {
+      "text": "Output contains the APPROVED STORY header block",
+      "passed": true,
+      "evidence": "Header found"
+    },
+    {
+      "text": "Story follows correct As a / I want / so that format",
+      "passed": true,
+      "evidence": "Format present"
+    },
+    {
+      "text": "Acceptance Criteria section present",
+      "passed": true,
+      "evidence": "Section found"
+    },
+    {
+      "text": "INVEST Note present",
+      "passed": true,
+      "evidence": "Found"
+    },
+    {
+      "text": "Story Points present",
+      "passed": true,
+      "evidence": "Found"
+    },
+    {
+      "text": "No Given/When/Then (Gherkin pattern) in output",
+      "passed": true,
+      "evidence": "No Gherkin"
+    },
+    {
+      "text": "Pipeline labels [STORY WRITER] and [TECH LEAD] present",
+      "passed": true,
+      "evidence": "Both labels present"
+    },
+    {
+      "text": "AEM 404 conditions: invalid SKU, unpublished, out-of-market all present",
+      "passed": true,
+      "evidence": "All three present"
+    },
+    {
+      "text": "No invented conditions beyond the three stated (no 'deleted', 'archived')",
+      "passed": true,
+      "evidence": "PASS: No deleted/archived"
+    },
+    {
+      "text": "Happy-path uses plain generic language, not jargon like 'in-market product'",
+      "passed": true,
+      "evidence": "PASS: No 'in-market product'"
+    }
+  ]
+}

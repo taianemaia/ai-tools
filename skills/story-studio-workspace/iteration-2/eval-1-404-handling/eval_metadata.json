@@ -1,0 +1,43 @@
+{
+  "eval_id": 1,
+  "eval_name": "404-handling-pdp",
+  "prompt": "Help me turn this into a proper user story: implement 404 handling for PDP routes, rules should match AEM",
+  "assertions": [
+    {
+      "text": "Output contains the APPROVED STORY header block",
+      "check": "output contains '━━━━━━━━━━━━━━━━━━━━━━━━ APPROVED STORY'"
+    },
+    {
+      "text": "Story follows correct As a / I want / so that format",
+      "check": "output contains 'Story: As a' and 'I want' and 'so that'"
+    },
+    {
+      "text": "Acceptance Criteria section present",
+      "check": "output contains 'Acceptance Criteria'"
+    },
+    {
+      "text": "INVEST Note present",
+      "check": "output contains 'INVEST Note'"
+    },
+    {
+      "text": "Story Points present",
+      "check": "output contains 'Story Points'"
+    },
+    {
+      "text": "No Given/When/Then in output",
+      "check": "output does NOT contain 'Given' or 'When/Then' in criteria context"
+    },
+    {
+      "text": "Pipeline labels [STORY WRITER] and [TECH LEAD] present",
+      "check": "output contains '[STORY WRITER' and '[TECH LEAD'"
+    },
+    {
+      "text": "AEM 404 conditions defined: invalid SKU, unpublished, out-of-market — no extra invented conditions",
+      "check": "output contains 'invalid' and 'unpublished' and 'out-of-market' but does NOT contain 'deleted' or 'archived' without stakeholder confirmation"
+    },
+    {
+      "text": "Happy-path criterion uses plain generic language, not invented domain jargon like 'in-market product'",
+      "check": "output does NOT contain 'in-market product' in acceptance criteria"
+    }
+  ]
+}

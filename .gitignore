@@ -1,0 +1,8 @@
+# Machine-specific permissions (pre-granted Bash/Read paths vary per machine)
+.claude/settings.local.json
+
+# API keys and secrets
+skills/nutritionist/config.json
+
+# macOS
+.DS_Store

@@ -1,0 +1,84 @@
+[STORY WRITER - turn 1]
+
+Story: As a shopper, I want to search for products by keyword so that I can quickly find items I intend to purchase.
+
+Acceptance Criteria:
+- A search input field is visible and accessible on every page of the storefront.
+- Typing in the search field triggers a query after 300 ms of inactivity (debounce), without requiring the shopper to press Enter.
+- Search results are returned based on matches against product name, description, and SKU.
+- A maximum of 50 results are displayed per search query.
+- Results are displayed with product name, thumbnail image, price, and availability status.
+- When no results match the query, the page displays a "No results found" message alongside a curated list of popular products.
+- When the search field is empty (initial state), a list of popular products is shown beneath the search bar.
+- Partial-word matches (prefix matching) are supported; e.g., typing "sho" returns results including "shoes" and "shorts".
+- Search is case-insensitive.
+- Results load within 2 seconds under normal network conditions.
+- If the search service is unavailable, the shopper sees an inline error message: "Search is temporarily unavailable. Please try again later."
+
+INVEST Note: Independent, Negotiable on result ranking and filter scope, Valuable to shoppers directly, Estimable with clear UI and API criteria, Small enough for a single sprint, and fully Testable.
+
+Story Points: 5 — Involves frontend debounce logic, backend search API integration, empty/error states, and result rendering.
+
+---
+
+[TECH LEAD - turn 1]
+
+NEEDS_REVISION:
+- No sort/rank order defined for results — backend has no sort contract.
+- "Prefix matching" conflicts with description matching — specify strategy per field (prefix for name/SKU, full-text for description).
+- "Within 2 seconds under normal conditions" is untestable — define p95 latency against production catalog.
+- "Availability status" is undefined — specify label set ("In Stock", "Out of Stock", "Pre-order").
+- Error trigger not specified — define which HTTP codes (5xx) or timeout threshold triggers the error state.
+
+---
+
+[STORY WRITER - turn 2]
+
+Story: As a shopper, I want to search for products by keyword so that I can quickly find items I intend to purchase.
+
+Acceptance Criteria:
+- A search input field is visible and accessible on every page of the storefront.
+- Typing in the search field triggers a search query after 300 ms of inactivity (debounce); the shopper does not need to press Enter.
+- Search matches against product name and SKU using prefix matching, and against product description using full-text (contains) matching.
+- Results are sorted by relevance score descending; exact-name matches rank above prefix matches, which rank above description matches. Ties within the same rank tier are sorted alphabetically by product name.
+- A maximum of 50 results are displayed per search query.
+- Each result displays: product name, thumbnail image, price, and availability label ("In Stock", "Out of Stock", or "Pre-order").
+- The search API must respond with a p95 latency of <= 2 000 ms measured against the production catalog.
+- When the search field is empty (initial or cleared state), a curated list of popular products is displayed beneath the search bar.
+- When a query returns no results, the page displays "No results found for '[query]'" and shows the popular-products list as a fallback.
+- Search matching is case-insensitive.
+- When the search API returns an HTTP 5xx response or does not respond within 5 000 ms, an inline error message is displayed: "Search is temporarily unavailable. Please try again later." No results are shown in this state.
+
+INVEST Note: Independent, Negotiable on ranking weights and catalog size SLA, Valuable to shoppers directly, Estimable with concrete API and UI contracts, Small enough for one sprint, and fully Testable.
+
+Story Points: 5 — Moderate complexity covering debounce, multi-field search with ranked results, defined availability labels, SLA, and error/empty states.
+
+---
+
+[TECH LEAD - turn 2]
+
+APPROVED
+All five prior issues resolved — ranking order defined, search strategy specified per field, performance criterion measurable (p95 <= 2 000 ms), availability labels enumerated, error-state trigger precisely defined.
+
+━━━━━━━━━━━━━━━━━━━━━━━━ APPROVED STORY ━━━━━━━━━━━━━━━━━━━━━━━━
+
+Story: As a shopper, I want to search for products by keyword so that I can quickly find items I intend to purchase.
+
+Acceptance Criteria:
+- A search input field is visible and accessible on every page of the storefront.
+- Typing in the search field triggers a search query after 300 ms of inactivity (debounce); the shopper does not need to press Enter.
+- Search matches against product name and SKU using prefix matching, and against product description using full-text (contains) matching.
+- Results are sorted by relevance score descending; exact-name matches rank above prefix matches, which rank above description matches. Ties within the same rank tier are sorted alphabetically by product name.
+- A maximum of 50 results are displayed per search query.
+- Each result displays: product name, thumbnail image, price, and availability label ("In Stock", "Out of Stock", or "Pre-order").
+- The search API must respond with a p95 latency of <= 2 000 ms measured against the production catalog.
+- When the search field is empty (initial or cleared state), a curated list of popular products is displayed beneath the search bar.
+- When a query returns no results, the page displays "No results found for '[query]'" and shows the popular-products list as a fallback.
+- Search matching is case-insensitive.
+- When the search API returns an HTTP 5xx response or does not respond within 5 000 ms, an inline error message is displayed: "Search is temporarily unavailable. Please try again later." No results are shown in this state.
+
+INVEST Note: Independent, Negotiable on ranking weights and catalog size SLA, Valuable to shoppers directly, Estimable with concrete API and UI contracts, Small enough for one sprint, and fully Testable.
+
+Story Points: 5 — Moderate complexity covering debounce, multi-field search with ranked results, defined availability labels, SLA, and error/empty states; scope is well-bounded.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

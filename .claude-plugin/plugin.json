@@ -1,0 +1,17 @@
+{
+  "name": "ai-tools",
+  "version": "1.0.0",
+  "description": "Personal agents and skills for Claude Code and Codex",
+  "author": {
+    "name": "Taiane Maia",
+    "email": "taiane.g.maia@accenture.com"
+  },
+  "skills": "../skills/",
+  "hooks": "../hooks/hooks.json",
+  "interface": {
+    "displayName": "AI Tools",
+    "shortDescription": "Personal agent and skill definitions",
+    "category": "Productivity",
+    "capabilities": ["Interactive", "Write"]
+  }
+}

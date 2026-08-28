@@ -1,0 +1,35 @@
+{
+  "eval_id": 3,
+  "eval_name": "rate-limiting-api-story",
+  "prompt": "Write a user story for: add rate limiting to the public API",
+  "assertions": [
+    {
+      "text": "Output contains the APPROVED STORY header block",
+      "check": "output contains '━━━━━━━━━━━━━━━━━━━━━━━━ APPROVED STORY'"
+    },
+    {
+      "text": "Story follows correct As a / I want / so that format",
+      "check": "output contains 'Story: As a' and 'I want' and 'so that'"
+    },
+    {
+      "text": "Acceptance criteria mention HTTP 429 status code",
+      "check": "output contains '429'"
+    },
+    {
+      "text": "Acceptance criteria specify a concrete rate limit threshold (e.g. requests per minute/hour) or surface it as an Open Question",
+      "check": "output acceptance criteria contain a numeric limit or reference to configurable threshold, OR output contains 'Open Questions' section about the threshold"
+    },
+    {
+      "text": "No Given/When/Then in acceptance criteria",
+      "check": "output does NOT contain 'Given' or 'When/Then' in criteria context"
+    },
+    {
+      "text": "Output contains INVEST Note",
+      "check": "output contains 'INVEST Note'"
+    },
+    {
+      "text": "Output contains Story Points with justification",
+      "check": "output contains 'Story Points'"
+    }
+  ]
+}

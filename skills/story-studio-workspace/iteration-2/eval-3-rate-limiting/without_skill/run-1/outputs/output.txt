@@ -1,0 +1,35 @@
+# User Story: Add Rate Limiting to the Public API
+
+## Story
+
+**As a** platform operator,
+**I want** rate limiting enforced on the public API,
+**So that** the service remains stable and fair for all consumers, and is protected against abuse or unintentional overload.
+
+---
+
+## Acceptance Criteria
+
+### 1. Per-Client Rate Limit Enforcement
+- **Given** an authenticated API client makes requests, **When** the number of requests exceeds the configured limit within a defined time window (e.g., 1000 requests per minute), **Then** subsequent requests within that window receive an HTTP `429 Too Many Requests` response.
+
+### 2. Rate Limit Headers in Every Response
+- **Given** any API request is made, **When** a response is returned, **Then** the response includes: `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers.
+
+### 3. Informative 429 Response Body
+- **Given** a client exceeds its rate limit, **When** the `429` response is returned, **Then** the body includes a machine-readable error code, a human-readable message, and a `Retry-After` header.
+
+### 4. Configurable Limits per Tier or API Key
+- Administrators can set distinct rate limit thresholds per tier or per individual API key without a code deployment.
+
+### 5. Unauthenticated Request Limiting
+- Unauthenticated requests are rate-limited by IP address with a stricter global threshold.
+
+### 6. Distributed Rate Limiting
+- Limits are enforced globally across all instances using a shared store (e.g., Redis).
+
+### 7. Internal/Admin Exemptions
+- Internal or admin API keys can be exempt or subject to a higher configurable threshold.
+
+### 8. Observability
+- Rate limit events are logged and metrics are incremented for monitoring.

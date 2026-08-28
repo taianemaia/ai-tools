@@ -1,0 +1,45 @@
+{
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 7,
+    "failed": 0,
+    "total": 7
+  },
+  "expectations": [
+    {
+      "text": "Contains APPROVED STORY header block",
+      "passed": true,
+      "evidence": "Found"
+    },
+    {
+      "text": "Story follows As a / I want / so that format",
+      "passed": true,
+      "evidence": "Story: As a ... found"
+    },
+    {
+      "text": "Acceptance criteria mention HTTP 429",
+      "passed": true,
+      "evidence": "429 found"
+    },
+    {
+      "text": "Acceptance criteria specify concrete rate limit threshold",
+      "passed": true,
+      "evidence": "Numeric threshold found"
+    },
+    {
+      "text": "No Given/When/Then",
+      "passed": true,
+      "evidence": "No GWT found \u2713"
+    },
+    {
+      "text": "INVEST Note present",
+      "passed": true,
+      "evidence": "Found"
+    },
+    {
+      "text": "Story Points with justification present",
+      "passed": true,
+      "evidence": "Found"
+    }
+  ]
+}

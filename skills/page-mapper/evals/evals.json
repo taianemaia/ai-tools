@@ -1,0 +1,23 @@
+{
+  "skill_name": "page-mapper",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Map this page for me so I can write Playwright tests against it: https://www.wikipedia.org",
+      "expected_output": "A saved page-map__wikipedia-org__home.json file in ./page-maps/ containing areas (e.g. header_area, search_area), elements with selectors, bounds, and aliases. Followed by a summary of total elements and areas mapped.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "I need a DOM reference map for https://github.com/login — I want to use it later with Playwright to automate the login flow.",
+      "expected_output": "A saved page-map__github-com__login.json with form fields (username, password, submit button) mapped as elements, a login_form_area grouping them, page-absolute bounds for each, and high-confidence selectors where possible.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Generate element selectors for this page: https://www.bbc.com/news — I want to map the navigation, article cards, and footer.",
+      "expected_output": "A saved page-map__bbc-com__news.json with navigation elements, article card elements grouped into a card area, footer elements grouped into a footer_area, page-absolute bounds, and plain-English aliases for each.",
+      "files": []
+    }
+  ]
+}

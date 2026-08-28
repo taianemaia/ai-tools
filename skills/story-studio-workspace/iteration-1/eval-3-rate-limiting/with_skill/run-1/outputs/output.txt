@@ -1,0 +1,72 @@
+[STORY WRITER - turn 1]
+
+Story: As an API consumer, I want requests to the public API to be rate-limited per API key, so that the platform remains stable and fair for all users under high traffic conditions.
+
+Acceptance Criteria:
+- Each API key is limited to 1000 requests per minute using a sliding window algorithm.
+- Requests that exceed the rate limit receive an HTTP 429 Too Many Requests response.
+- The 429 response includes a Retry-After header indicating the number of seconds the client must wait before making another request.
+- The rate limit counter resets on a per-key, per-window basis — one API key exceeding its limit does not affect other keys.
+- Requests without a valid API key are rejected with HTTP 401 before rate limiting is evaluated.
+- The rate limit window and threshold are configurable without a code deployment.
+- Rate limit enforcement is applied consistently across all public API endpoints.
+
+INVEST Note: Independent (scoped to the rate-limiting layer), Negotiable (thresholds are configurable), Valuable (protects platform stability and fairness), Estimable (clear algorithm and response contract), Small (one well-bounded concern), and Testable (all criteria are directly verifiable).
+
+Story Points: 5 — Moderately complex; requires a shared store, middleware integration, and edge-case testing.
+
+---
+
+[TECH LEAD - turn 1]
+
+NEEDS_REVISION:
+- Specify what backing store is used for the sliding window counters (e.g. Redis) or state the implementation is storage-agnostic.
+- Clarify whether standard rate-limit headers (X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset) are returned on non-429 responses, or are explicitly out of scope.
+- Define what happens when the backing store is unavailable: fail open (allow requests) or fail closed (deny requests).
+- "Configurable without a code deployment" — specify the mechanism (environment variable, feature flag, config file reload).
+
+---
+
+[STORY WRITER - turn 2]
+
+Story: As an API consumer, I want requests to the public API to be rate-limited per API key, so that the platform remains stable and fair for all users under high traffic conditions.
+
+Acceptance Criteria:
+- Each API key is limited to 1000 requests per minute using a sliding window algorithm backed by Redis.
+- Requests that exceed the rate limit receive an HTTP 429 Too Many Requests response with a Retry-After header indicating the number of seconds until the client's window resets.
+- Every API response (including successful ones) includes the headers: X-RateLimit-Limit (maximum requests allowed per window), X-RateLimit-Remaining (requests remaining in the current window), and X-RateLimit-Reset (Unix timestamp when the window resets).
+- The rate limit counter is scoped per API key — one key exceeding its limit has no effect on other keys.
+- Requests without a valid API key are rejected with HTTP 401 before rate limiting is evaluated.
+- If the Redis backing store is unavailable, the API fails open: requests are allowed through and rate-limit headers are omitted from the response.
+- The rate limit threshold (default: 1000 req/min) and window size are configurable via environment variables; changes take effect on the next process start without a code deployment.
+- Rate limit enforcement is applied at the API gateway layer, covering all public API endpoints uniformly.
+
+INVEST Note: Independent (self-contained rate-limiting concern), Negotiable (thresholds, fail-open behavior, and header set are defined but can be revisited), Valuable (protects platform stability and gives clients quota visibility), Estimable (all technical decisions are explicit), Small (one cohesive concern bounded to the gateway layer), and Testable (every criterion is directly verifiable).
+
+Story Points: 5 — Redis-backed sliding window logic, middleware integration, response header injection, graceful failure handling, and env-var configuration — moderately complex but well-scoped.
+
+---
+
+[TECH LEAD - turn 2]
+
+APPROVED — The story is clear, technically complete, and sprint-ready.
+
+━━━━━━━━━━━━━━━━━━━━━━━━ APPROVED STORY ━━━━━━━━━━━━━━━━━━━━━━━━
+
+Story: As an API consumer, I want requests to the public API to be rate-limited per API key, so that the platform remains stable and fair for all users under high traffic conditions.
+
+Acceptance Criteria:
+- Each API key is limited to 1000 requests per minute using a sliding window algorithm backed by Redis.
+- Requests that exceed the rate limit receive an HTTP 429 Too Many Requests response with a Retry-After header indicating the number of seconds until the client's window resets.
+- Every API response (including successful ones) includes: X-RateLimit-Limit (max requests per window), X-RateLimit-Remaining (requests remaining), and X-RateLimit-Reset (Unix timestamp of window reset).
+- The rate limit counter is scoped per API key — one key exceeding its limit has no effect on other keys.
+- Requests without a valid API key are rejected with HTTP 401 before rate limiting is evaluated.
+- If the Redis backing store is unavailable, the API fails open: requests are allowed through and rate-limit headers are omitted.
+- The rate limit threshold (default: 1000 req/min) and window size are configurable via environment variables; changes take effect on the next process start without a code deployment.
+- Rate limit enforcement is applied at the API gateway layer, covering all public API endpoints uniformly.
+
+INVEST Note: Independent (self-contained concern), Negotiable (thresholds and fail-open behavior can be revisited), Valuable (protects stability and gives clients quota visibility), Estimable (all technical decisions explicit), Small (bounded to the gateway layer), Testable (every criterion directly verifiable).
+
+Story Points: 5 — Redis-backed sliding window, middleware integration across all endpoints, header injection, graceful Redis failure handling, and env-var configuration.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

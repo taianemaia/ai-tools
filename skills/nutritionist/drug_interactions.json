@@ -1,0 +1,114 @@
+{
+  "levothyroxine": {
+    "avoid_within_hours": 4,
+    "nutrients_to_avoid": ["calcium", "iron", "magnesium", "fiber"],
+    "foods_to_avoid": ["dairy", "high-fiber foods", "soy", "coffee", "grapefruit"],
+    "timing_note": "Take 30–60 min before breakfast on an empty stomach",
+    "depletions": [],
+    "warning": "Calcium, iron, and magnesium block levothyroxine absorption. Avoid dairy, fortified foods, and supplements within 4h of dose."
+  },
+  "metformin": {
+    "avoid_within_hours": 0,
+    "nutrients_to_avoid": [],
+    "foods_to_avoid": ["alcohol"],
+    "timing_note": "Take with meals to reduce GI side effects",
+    "depletions": ["vitamin B12", "folate"],
+    "warning": "Long-term metformin use may reduce vitamin B12 and folate absorption. Consider B12 monitoring and supplementation."
+  },
+  "warfarin": {
+    "avoid_within_hours": 0,
+    "nutrients_to_avoid": ["vitamin K"],
+    "foods_to_avoid": ["spinach", "kale", "broccoli", "Brussels sprouts", "parsley", "cranberry juice", "grapefruit"],
+    "timing_note": "Maintain consistent vitamin K intake — do not drastically increase or decrease",
+    "depletions": [],
+    "warning": "Vitamin K (found in leafy greens) directly affects warfarin efficacy. Do not drastically change your intake of vitamin K-rich foods."
+  },
+  "simvastatin": {
+    "avoid_within_hours": 0,
+    "nutrients_to_avoid": [],
+    "foods_to_avoid": ["grapefruit", "grapefruit juice", "large amounts of alcohol"],
+    "timing_note": "Take in the evening; avoid grapefruit",
+    "depletions": ["CoQ10"],
+    "warning": "Statins may deplete CoQ10. Grapefruit inhibits statin metabolism — avoid entirely."
+  },
+  "atorvastatin": {
+    "avoid_within_hours": 0,
+    "nutrients_to_avoid": [],
+    "foods_to_avoid": ["grapefruit", "grapefruit juice"],
+    "timing_note": "Can be taken any time of day; avoid grapefruit",
+    "depletions": ["CoQ10"],
+    "warning": "Statins may deplete CoQ10. Grapefruit inhibits statin metabolism — avoid entirely."
+  },
+  "omeprazole": {
+    "avoid_within_hours": 0,
+    "nutrients_to_avoid": [],
+    "foods_to_avoid": [],
+    "timing_note": "Take 30–60 min before meals",
+    "depletions": ["magnesium", "vitamin B12", "vitamin C", "iron", "calcium"],
+    "warning": "Long-term PPI use may impair absorption of magnesium, B12, vitamin C, iron, and calcium. Consider monitoring if used long-term."
+  },
+  "esomeprazole": {
+    "avoid_within_hours": 0,
+    "nutrients_to_avoid": [],
+    "foods_to_avoid": [],
+    "timing_note": "Take 30–60 min before meals",
+    "depletions": ["magnesium", "vitamin B12", "vitamin C", "iron", "calcium"],
+    "warning": "Long-term PPI use may impair absorption of magnesium, B12, vitamin C, iron, and calcium."
+  },
+  "ciprofloxacin": {
+    "avoid_within_hours": 2,
+    "nutrients_to_avoid": ["calcium", "iron", "magnesium", "zinc"],
+    "foods_to_avoid": ["dairy products", "calcium-fortified foods", "antacids"],
+    "timing_note": "Take 2h before or 6h after dairy/mineral-rich foods",
+    "depletions": [],
+    "warning": "Dairy and mineral-rich foods significantly reduce ciprofloxacin absorption. Take on an empty stomach when possible."
+  },
+  "ibuprofen": {
+    "avoid_within_hours": 0,
+    "nutrients_to_avoid": [],
+    "foods_to_avoid": ["alcohol"],
+    "timing_note": "Take with food or milk to reduce stomach irritation",
+    "depletions": ["vitamin C"],
+    "warning": "Take with food to reduce GI irritation. Avoid alcohol. Long-term use may affect vitamin C status."
+  },
+  "sertraline": {
+    "avoid_within_hours": 0,
+    "nutrients_to_avoid": [],
+    "foods_to_avoid": ["alcohol", "grapefruit juice"],
+    "timing_note": "Can be taken with or without food",
+    "depletions": ["sodium (hyponatremia risk in elderly)"],
+    "warning": "Avoid alcohol. Grapefruit juice may increase sertraline levels. In rare cases, SSRIs can cause low sodium."
+  },
+  "prednisone": {
+    "avoid_within_hours": 0,
+    "nutrients_to_avoid": [],
+    "foods_to_avoid": ["high-sodium foods", "alcohol"],
+    "timing_note": "Take with food to reduce stomach upset; take in the morning",
+    "depletions": ["calcium", "vitamin D", "potassium", "vitamin C", "zinc", "magnesium"],
+    "warning": "Corticosteroids deplete calcium, vitamin D, potassium, and other nutrients. Ensure adequate calcium and vitamin D intake. Limit sodium and alcohol."
+  },
+  "lisinopril": {
+    "avoid_within_hours": 0,
+    "nutrients_to_avoid": ["potassium"],
+    "foods_to_avoid": ["high-potassium foods (bananas, oranges, potatoes)", "salt substitutes", "alcohol"],
+    "timing_note": "Can be taken with or without food",
+    "depletions": ["zinc"],
+    "warning": "ACE inhibitors increase potassium retention. Avoid potassium supplements and salt substitutes. Long-term use may deplete zinc."
+  },
+  "amlodipine": {
+    "avoid_within_hours": 0,
+    "nutrients_to_avoid": [],
+    "foods_to_avoid": ["grapefruit", "grapefruit juice"],
+    "timing_note": "Can be taken with or without food",
+    "depletions": [],
+    "warning": "Grapefruit juice can increase amlodipine levels and side effects — avoid entirely."
+  },
+  "furosemide": {
+    "avoid_within_hours": 0,
+    "nutrients_to_avoid": [],
+    "foods_to_avoid": ["alcohol", "licorice"],
+    "timing_note": "Take in the morning to avoid nighttime urination",
+    "depletions": ["potassium", "magnesium", "calcium", "sodium", "thiamine (B1)", "zinc"],
+    "warning": "Loop diuretics cause significant loss of potassium, magnesium, and other electrolytes. Increase intake of potassium-rich foods (bananas, avocado, sweet potato)."
+  }
+}

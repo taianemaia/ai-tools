@@ -1,0 +1,50 @@
+{
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 8,
+    "failed": 0,
+    "total": 8
+  },
+  "expectations": [
+    {
+      "text": "Contains APPROVED STORY header block",
+      "passed": true,
+      "evidence": "Found"
+    },
+    {
+      "text": "Story follows As a / I want / so that format",
+      "passed": true,
+      "evidence": "Story: As a ... found"
+    },
+    {
+      "text": "Acceptance Criteria section present",
+      "passed": true,
+      "evidence": "Found"
+    },
+    {
+      "text": "INVEST Note present",
+      "passed": true,
+      "evidence": "Found"
+    },
+    {
+      "text": "Story Points present",
+      "passed": true,
+      "evidence": "Found"
+    },
+    {
+      "text": "No Given/When/Then anywhere",
+      "passed": true,
+      "evidence": "No GWT found \u2713"
+    },
+    {
+      "text": "Pipeline labels [STORY WRITER] and [TECH LEAD] present",
+      "passed": true,
+      "evidence": "writer=\u2713 lead=\u2713"
+    },
+    {
+      "text": "AEM 404 conditions defined concretely (invalid SKU / unpublished / out-of-market)",
+      "passed": true,
+      "evidence": "invalid_sku=\u2713 unpublished=\u2713 out-of-market=\u2713"
+    }
+  ]
+}

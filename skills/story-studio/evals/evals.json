@@ -1,0 +1,52 @@
+{
+  "skill_name": "story-studio",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Help me turn this into a proper user story: implement 404 handling for PDP routes, rules should match AEM",
+      "expected_output": "Full pipeline run with turn labels, NEEDS_HUMAN for AEM rules, final APPROVED STORY block with concrete 404 conditions",
+      "files": [],
+      "assertions": [
+        {"text": "Contains APPROVED STORY header block"},
+        {"text": "Story follows As a / I want / so that format"},
+        {"text": "Acceptance Criteria section present"},
+        {"text": "INVEST Note present"},
+        {"text": "Story Points present"},
+        {"text": "No Given/When/Then anywhere"},
+        {"text": "Pipeline labels [STORY WRITER] and [TECH LEAD] present"},
+        {"text": "AEM 404 conditions defined concretely (invalid SKU / unpublished / out-of-market)"},
+        {"text": "No invented conditions added beyond the three stated (no 'deleted', 'archived', etc.)"},
+        {"text": "Happy-path criterion uses plain generic language, not invented jargon like 'in-market product'"}
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Refine this story: As a shopper I want to search for products so that I can find things to buy",
+      "expected_output": "Refined story with specific acceptance criteria, INVEST note, story points, no Given/When/Then",
+      "files": [],
+      "assertions": [
+        {"text": "Contains APPROVED STORY header block"},
+        {"text": "Story follows As a / I want / so that format"},
+        {"text": "No Given/When/Then in acceptance criteria"},
+        {"text": "Acceptance criteria more specific than the original vague story"},
+        {"text": "INVEST Note present"},
+        {"text": "Story Points with justification present"}
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Write a user story for: add rate limiting to the public API",
+      "expected_output": "Story with concrete rate limit thresholds, 429 status, INVEST note, story points, no Given/When/Then",
+      "files": [],
+      "assertions": [
+        {"text": "Contains APPROVED STORY header block"},
+        {"text": "Story follows As a / I want / so that format"},
+        {"text": "Acceptance criteria mention HTTP 429"},
+        {"text": "Acceptance criteria specify concrete rate limit threshold or surface it as an Open Question"},
+        {"text": "No Given/When/Then"},
+        {"text": "INVEST Note present"},
+        {"text": "Story Points with justification present"}
+      ]
+    }
+  ]
+}

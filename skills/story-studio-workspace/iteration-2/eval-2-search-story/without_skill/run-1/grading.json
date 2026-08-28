@@ -1,0 +1,40 @@
+{
+  "summary": {
+    "pass_rate": 0.3333333333333333,
+    "passed": 2,
+    "failed": 4,
+    "total": 6
+  },
+  "expectations": [
+    {
+      "text": "Output contains the APPROVED STORY header block",
+      "passed": false,
+      "evidence": "Not found"
+    },
+    {
+      "text": "Story follows correct As a / I want / so that format",
+      "passed": true,
+      "evidence": "Present"
+    },
+    {
+      "text": "No Given/When/Then (Gherkin pattern) in acceptance criteria",
+      "passed": false,
+      "evidence": "FAIL: Gherkin 'Given' pattern found"
+    },
+    {
+      "text": "Acceptance criteria more specific than original vague story",
+      "passed": true,
+      "evidence": "Specific criteria found"
+    },
+    {
+      "text": "INVEST Note present",
+      "passed": false,
+      "evidence": "Not found"
+    },
+    {
+      "text": "Story Points with justification present",
+      "passed": false,
+      "evidence": "Not found"
+    }
+  ]
+}

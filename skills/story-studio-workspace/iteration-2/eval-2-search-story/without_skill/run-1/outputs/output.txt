@@ -1,0 +1,55 @@
+# Refined User Story: Product Search
+
+## User Story
+
+**As a** shopper,
+**I want to** search for products using keywords, filters, and sorting options,
+**So that** I can quickly find relevant items to purchase without having to browse through the entire catalog.
+
+---
+
+## Acceptance Criteria
+
+**AC1 — Basic Keyword Search**
+- Given I am on any page of the store, when I type a keyword or phrase into the search bar and submit (via Enter key or search button), then I am taken to a search results page displaying products whose name, description, or category match the query.
+
+**AC2 — Empty Query Handling**
+- Given I submit a search with an empty or whitespace-only query, then I remain on the current page and see an inline validation message prompting me to enter a search term.
+
+**AC3 — No Results State**
+- Given I search for a term that matches no products, then I see a clear "No results found for [query]" message along with suggestions such as checking spelling or browsing popular categories.
+
+**AC4 — Search Results Display**
+- Given results are returned, each result shows at minimum: product image, product name, price, and an "Add to Cart" or "View Details" call-to-action.
+
+**AC5 — Result Count**
+- Given results are returned, I can see the total number of results found (e.g., "42 results for 'running shoes'").
+
+**AC6 — Filtering Results**
+- Given I am on a results page, when I apply filters (category, price range, brand, rating, availability), the results update to show only matching products and active filters are visibly indicated so I can remove them individually.
+
+**AC7 — Sorting Results**
+- Given I am on a results page, when I select a sort option (Relevance, Price: Low to High, Price: High to Low, Newest, Best Rated), the results reorder without losing active filters.
+
+**AC8 — Pagination**
+- Given search returns more results than fit on one page, I can navigate to additional results via pagination or infinite scroll, and my filters and sort are preserved.
+
+**AC9 — Search Performance**
+- Results appear within 2 seconds under normal load; a loading indicator is shown if the response takes longer than 500ms.
+
+**AC10 — Autocomplete Suggestions (nice-to-have)**
+- Given I have typed at least 2 characters, I see up to 8 suggested search terms or product names that I can select to trigger a search.
+
+**AC11 — Search Term Persistence**
+- Given I navigate from results to a product detail page and press back, my previous query, filters, and sort order are still applied.
+
+**AC12 — Accessibility**
+- The search input is reachable via Tab navigation, results are announced by screen readers, and all interactive elements have accessible labels (WCAG 2.1 AA compliance).
+
+---
+
+## Out of Scope
+- Saved searches or search history
+- Voice search / image-based search
+- Personalized/AI-driven recommendations
+- Search analytics dashboard

@@ -1,0 +1,31 @@
+{
+  "eval_id": 2,
+  "eval_name": "search-story-refinement",
+  "prompt": "Refine this story: As a shopper I want to search for products so that I can find things to buy",
+  "assertions": [
+    {
+      "text": "Output contains the APPROVED STORY header block",
+      "check": "output contains '━━━━━━━━━━━━━━━━━━━━━━━━ APPROVED STORY'"
+    },
+    {
+      "text": "Story follows correct As a / I want / so that format",
+      "check": "output contains 'Story: As a' and 'I want' and 'so that'"
+    },
+    {
+      "text": "No Given/When/Then in acceptance criteria",
+      "check": "output does NOT contain 'Given' or 'When/Then' in criteria context"
+    },
+    {
+      "text": "Acceptance criteria more specific than the original vague story",
+      "check": "output acceptance criteria contain specific details about search behavior"
+    },
+    {
+      "text": "INVEST Note present",
+      "check": "output contains 'INVEST Note'"
+    },
+    {
+      "text": "Story Points with justification present",
+      "check": "output contains 'Story Points'"
+    }
+  ]
+}
