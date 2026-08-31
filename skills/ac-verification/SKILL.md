@@ -54,5 +54,5 @@ For each AC:
 
 ## Step 3 — Present the assessment
 
-Reply with the assessment as inline markdown — do not write it to a file. Include the AC table:
-status, evidence citations, and any integration-test coverage gaps flagged in Step 2.
+Reply with the assessment as inline markdown, following the structure in
+`references/output-format.md` — do not write it to a file.
