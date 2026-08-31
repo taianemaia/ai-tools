@@ -50,14 +50,15 @@ normal application access — for example:
 Judge by what verifying the behavior actually requires, not by what's more convenient to write
 about. Record a one-line reason for every "Requires tech lead" AC.
 
-## Step 2 — Confirm the environment and tool before drafting anything
+## Step 2 — Set the environment and tool before drafting anything
 
-Don't assume. Ask the user (unless it's already clear from context):
-- **Which real environment** will the tester use — one that's already integrated with its real
-  upstream dependencies? Get its name/URL if relevant.
-- **What tool** will they use — Postman, the application UI, something else? Match the plan's
-  instructions to that tool (e.g. Postman: environment variables, a Headers-tab checkbox to toggle
-  a header without retyping it; a UI: click-by-click navigation).
+- **Environment.** Default to **INT1** unless the user has explicitly stated a different
+  environment. Don't ask — state which environment the plan targets and proceed.
+- **Tool.** Don't ask the user which tool they'll use. Suggest one yourself — state which tool and
+  why (e.g. Postman, because it lets the tester toggle a header on/off without retyping it) —
+  unless the user has already told you explicitly which tool to use, in which case use that one.
+  Match the plan's instructions to whichever tool applies (e.g. Postman: environment variables, a
+  Headers-tab checkbox to toggle a header without retyping it; a UI: click-by-click navigation).
 
 Assume real access to a real environment by default — do not propose a local stub, a mock server,
 or a fake upstream for the QA-testable test cases in Step 3. Local workarounds only belong in
