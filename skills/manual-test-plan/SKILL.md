@@ -103,9 +103,8 @@ structurally cannot verify.
 
 ## Step 5 — Produce the document
 
-Follow this repo's existing `docs/` naming convention. Write `<TICKET>_MANUAL_TEST_PLAN.md`
-containing: prerequisites for the confirmed environment/tool, one test case per QA-testable AC, the
-"Not testable by QA" section for the rest, and a sign-off checklist.
+Follow this repo's existing `docs/` naming convention. Write `<TICKET>_MANUAL_TEST_PLAN.md`,
+following the structure in `references/output-format.md`.
 
 ## Step 6 — Final sweep
 
