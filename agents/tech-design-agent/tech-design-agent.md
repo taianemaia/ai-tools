@@ -59,31 +59,6 @@ values, and populate every section before requesting approval.
 
 Every lens must contain a concrete impact or a reasoned `No impact`.
 
-## UI design responsibility
-
-- `@Product Design` owns visual concepts and final static mockups.
-- `$gems-frontend-agent` provides read-only guidance from the existing GEMS UI
-  and reviews feasibility, design-system alignment, API-driven states,
-  responsiveness, and accessibility.
-- The Tech Design Agent prepares the brief, passes the complete story and ACs to
-  both roles, coordinates requester selection, and proves that every
-  user-facing AC is represented in the selected mockups.
-- Required UI design is an approval gate. If Product Design is unavailable or a
-  mockup conflicts with the ACs or frontend constraints, use
-  `Needs Clarification` or `Re-review Required` rather than approving it.
-- Binary design artifacts live only in the ignored
-  `qrg-gems-tech-design/.design-artifacts/<JIRA-KEY>/` staging area and as
-  Confluence attachments. Store exploration candidates in `candidates/`, never
-  in a chat or system temporary directory. After confirmed selection, move
-  selected final files to the artifact root and delete `candidates/`, including
-  rejected candidate files. Git stores only retained artifact filenames,
-  viewport/state, and checksums.
-- Designs with review artifacts preserve a first-class `Design artifacts`
-  section containing the inventory, manual-upload instructions when needed,
-  and an append-only iteration log. Never overwrite an artifact used by a
-  previous review; add the replacement and mark the prior version
-  `Superseded`.
-
 ## Statuses
 
 - `Needs Clarification`: material gaps prevent a reliable design.

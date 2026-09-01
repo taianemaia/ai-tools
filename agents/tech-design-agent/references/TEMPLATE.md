@@ -86,14 +86,6 @@ Describe the user, need, outcome, business value, and boundaries.
 Describe the end-to-end behavior, component responsibilities, boundaries,
 contracts, and key flows.
 
-## Mockups and design artifacts
-
-Use this section whenever a design has user-visible UI or produces a visual,
-diagram, prototype, export, or other binary review artifact. For user-visible
-designs, this section is required: inventory the selected mockup set, its
-states, its local location and checksum when a local copy exists, and its
-Confluence status.
-Keep it for future iterations even when the first upload is manual.
 
 For Product Design exploration, generate candidates inside this repository at
 `.design-artifacts/<JIRA-KEY>/candidates/`, never in a chat or system temporary
@@ -107,32 +99,6 @@ files; commit only this inventory and iteration history.
 | Artifact | Viewport/state | Local location/checksum | Confluence status/link |
 |---|---|---|---|
 | `<KEY>-ui-01-state.png` | Desktop/state | Not retained locally / checksum unavailable | Pending upload |
-
-### Manual upload instructions
-
-1. Attach every selected artifact to the story's Confluence Tech Design page.
-2. Record the Confluence attachment link, or `Published — URL pending` when
-   publication is confirmed but the URL has not yet been supplied.
-3. Record the upload date and completion status in the iteration log.
-4. Confirm each attachment opens for the intended audience before implementation
-   handoff.
-5. Keep local binary files Git-ignored and uncommitted. On confirmed selection,
-   move selected files to the artifact root, delete `candidates/`, and update
-   this section.
-
-Only selected final artifacts are attached to Confluence. Rejected directions
-remain temporary and are removed after selection. If Confluence is unavailable,
-leave attachment and synchronization status incomplete.
-
-### Artifact iteration log
-
-Do not overwrite an artifact that reviewers have already used. Add a new
-iteration with a new filename and checksum and mark the prior artifact as
-`Superseded`.
-
-| Iteration | Date | Change | Artifacts | Status |
-|---|---|---|---|---|
-| `v1` | YYYY-MM-DD | Initial selected design | `<KEY>-ui-01-state.png` | Pending upload |
 
 ## Decisions and alternatives
 

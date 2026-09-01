@@ -37,11 +37,7 @@ Ask the user (only what's not already known):
    If provided, you will fetch them (see Step 2).
 4. **Any related files?** Known components, hooks, or API routes the story
    touches. Skip this if you can infer it from the story and codebase.
-5. **Is the current AEM behavior known?** If the story involves replicating
-   or pairing behavior from the legacy AEM platform and the expected behavior
-   is not fully described in the story (e.g. "mirror what AEM does", or the
-   acceptance criteria leave the actual AEM logic unspecified), say so — you
-   will investigate the AEM repos before planning (see Step 2b).
+
 
 If invoked from story-studio, the approved story is already your input —
 skip asking for the story itself, but still gather the context above.
@@ -75,13 +71,6 @@ you spot must be raised to the human before the plan is approved (see Rules).
 - Read 2–3 existing components similar to what the story requires — absorb
   the patterns before proposing new ones
 
-**Confluence docs — if the user provided URLs or topics:**
-- Invoke the **confluence-fetcher** skill, passing the URL, page ID, or topic.
-- The fetcher will search, pick the best match, fetch, and return
-  `CONFLUENCE_FINDINGS:` — treat those findings as authoritative input.
-- If the fetcher reports it cannot access Confluence, ask the user to paste
-  the relevant section and continue from that.
-
 **What you're looking for:**
 - Where should new files live? Follow the existing directory conventions exactly
 - What naming conventions are in use? (PascalCase components, camelCase hooks, etc.)
@@ -90,46 +79,6 @@ you spot must be raised to the human before the plan is approved (see Rules).
 - How do API routes work in this project (App Router? Pages Router? tRPC?)?
 - How are environment variables and feature flags handled?
 
----
-
-## Step 2b — AEM research (when needed)
-
-Run this step whenever **any** of the following is true:
-- The story says something like "mirror AEM behavior", "match what AEM does",
-  or "replicate the current logic"
-- Acceptance criteria reference AEM behavior without specifying the actual
-  rules (e.g. "return the same response codes as AEM", "redirect as AEM does")
-- The story has open questions about current behavior that AEM code could answer
-- Your own read of the story leaves you uncertain about what the correct
-  NextJS behavior should be because the legacy source of truth is unclear
-
-Do not skip this step optimistically. If there is a realistic chance that
-reading the AEM code would change your implementation plan, run it.
-
-**How to run AEM research:**
-
-Invoke the **aem-researcher** skill, passing a focused question derived from
-the story. Frame the question the way a developer would ask it — specific,
-scoped to what you need to know to implement.
-
-Good question examples:
-- "How does AEM handle a request for a product SKU that is invalid, unpublished,
-  or out-of-market? What HTTP status is returned and what page is rendered?"
-- "What values can the `isPayPalEnabled` flag take in each geo (JP/UK/DE/US)?
-  Where is it configured?"
-- "What redirect rules apply when a category page has no results?"
-
-The aem-researcher will ask its own clarifying questions and return structured
-findings including which geos each rule applies to. Wait for its full response
-before continuing.
-
-**Once you have the findings:**
-- Treat them as ground truth for the feature's expected behavior
-- Incorporate them into your implementation plan (Step 3) under the
-  "AEM behavior reference" section
-- If the findings reveal geo-specific rules (e.g. a flag is only enabled for
-  JP), make sure your plan accounts for how that will be handled in NextJS
-  (feature flags, config, environment variables, etc.)
 
 ---
 

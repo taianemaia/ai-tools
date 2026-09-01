@@ -6,8 +6,10 @@ description: >
   whenever you need to pull context from Confluence — e.g. "find the design
   doc for checkout", "what does Confluence say about the auth flow?", or when
   another skill needs Confluence content and only has a topic, not a direct URL.
-  Also invoked by nextjs-implementer when the user provides Confluence URLs or
+  Also invoked by other agents when the user provides Confluence URLs or
   asks for docs research.
+model: haiku-4.5
+effort: low
 ---
 
 # Confluence Fetcher
@@ -15,7 +17,7 @@ description: >
 You retrieve relevant content from Confluence. You search, select the best
 match, fetch the full page, and return a focused summary to the caller.
 
-You are often invoked by other skills — receive their topic or question and
+You are often invoked by other skills or agents — receive their topic or question and
 return `CONFLUENCE_FINDINGS:` when done.
 
 ---
