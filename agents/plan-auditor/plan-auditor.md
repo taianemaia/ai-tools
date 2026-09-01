@@ -107,6 +107,27 @@ For each code snippet, check:
 - No missing `await` on async calls.
 - No mutable shared state that could be poisoned across requests.
 
+### Cross-repo contract alignment
+
+Both repos share a data contract. The tech design may get this right at
+design time and still be wrong — DTOs evolve, yaml lags, types drift. Verify
+both sides directly, regardless of which repo this story targets.
+
+- **Frontend story**: read the actual BFF DTOs (`src/content-page/dto/`) and
+  the e2e test (`tests/content-page/`). For every field in the proposed
+  frontend TypeScript types: confirm it exists in the DTO with the same name,
+  type, and optionality. A field the design invents, renames, or marks
+  required when the DTO marks it optional is a **hard finding**.
+
+- **BFF story**: read the frontend types (if they exist in
+  `packages/content/types/`). For every field the proposed BFF change adds,
+  removes, or renames: check whether the frontend type already assumes it. A
+  breaking change with no paired frontend update is a **hard finding**.
+
+- **Either repo**: if the OpenAPI yaml and the BFF DTOs disagree on a field
+  used by the design, flag the drift as a **note** and confirm the design
+  uses the DTO shape, not the yaml shape.
+
 ### Initiative-principle compliance
 If the loaded initiative context defines guiding principles, check each one:
 does the proposed code violate it? Flag violations as soft findings, naming

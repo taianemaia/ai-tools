@@ -65,6 +65,27 @@ Do not assert anything about the codebase you have not read directly. If a
 file does not exist where you expect it, note that — it may be a gap the
 story needs to address.
 
+**Step 2b — Cross-repo contract reconciliation**
+
+Both repos share a data contract. Misalignment between them is the most
+dangerous class of error because it compiles cleanly and fails silently at
+runtime. Always check both sides, regardless of which repo the story targets.
+
+- **Frontend story defining or consuming types**: read the BFF DTOs
+  (`src/content-page/dto/`) and compare field-by-field against the proposed
+  TypeScript types. The DTOs are ground truth; the OpenAPI yaml may lag.
+  Also read the e2e test (`tests/content-page/`) to verify the actual wire
+  shape. Any field name, type, or optionality mismatch is a concern.
+
+- **BFF story changing response shape or adding fields**: read the frontend
+  types (if they exist) and check whether the proposed change breaks or
+  requires updating them. Flag this as a dependency concern if the frontend
+  story hasn't been designed yet.
+
+- **Either repo**: if the OpenAPI yaml and the BFF DTOs disagree, always
+  treat the DTOs + e2e evidence as ground truth. Record the drift as a
+  concern so the design is honest about what the frontend will actually receive.
+
 **Step 3 — Update memory after saving the design**
 
 After Phase 4 (save and hand off), append any newly verified knowledge to the
