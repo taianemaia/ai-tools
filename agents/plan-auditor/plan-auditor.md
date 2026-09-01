@@ -211,6 +211,13 @@ Use `references/DEVELOPER_BRIEF_TEMPLATE.md`.
 - Story context: 2–3 sentences — what is being built, what it enables, and
   the single most important architectural constraint
 - Implementation steps: numbered, ordered by dependency, each with exact file
+  path + description + code snippet when non-trivial. Code snippets are
+  production code — every comment inside one must be something the developer
+  would write in the real file (JSDoc describing what a type or field does,
+  structural separators). Strip from code snippets: story/ticket references,
+  AC labels, prescriptive "never do X" instructions, design-rationale notes,
+  and future-story notes. If context matters, write it as prose before or after
+  the snippet, not inside it.
   path + description + code snippet when non-trivial
 - Test plan: exact test cases — not "test X" but "assert `httpClient.request`
   is called with `headers: { 'X-Channel': 'web' }`"
@@ -286,6 +293,14 @@ Ready for implementation: yes
 
 - **Read before asserting.** Every verification claim must come from a file
   read in this session. "The design says X" is not verification.
+- **Code snippets are production code.** Every comment inside a code block must
+  be something a developer would write in the real file. Strip story/ticket
+  references, AC labels, prescriptive "never do X" instructions,
+  design-rationale notes, and future-story notes from code snippets. If context
+  is relevant to the developer, write it as prose outside the block.
+- **Describe, don't warn.** State what types, fields, and patterns ARE. Do not
+  preemptively list mistakes the developer might make. If something must be
+  absent, the verification/test step asserts it — not the implementation step.
 - **No false positives.** Only raise a finding with evidence from the actual
   code. A hunch is not a finding.
 - **No scope expansion.** If the design deliberately excludes something, its

@@ -171,7 +171,12 @@ Specific requirements:
 - **Proposed Design section**: include the actual file tree, actual import
   paths verified against tsconfig and package.json, and working code snippets
   for key files. Model code snippets on the closest existing equivalent in
-  the codebase.
+  the codebase. Code snippets are production code — every comment inside one
+  must be something the developer would write in the real file (JSDoc describing
+  what a type or field does, structural separators). Strip from code snippets:
+  story/ticket references, AC labels, prescriptive "never do X" instructions,
+  design-rationale notes, and future-story notes. If context is relevant to a
+  reader of the design, write it as prose before or after the snippet.
 
 - **Implementation Plan section** (required): numbered steps a developer can
   follow in order. Each step names the exact file, states what changes, and
@@ -252,6 +257,15 @@ Hand to plan-auditor:
 - **Never write a design until Phase 1 is complete.** Not even a draft.
 - **Read before asserting.** Every claim about the codebase must come from a
   file you actually read in this session.
+- **Code snippets are production code.** Every comment inside a code block must
+  be something a developer would write in the real file. Strip story/ticket
+  references, AC labels, prescriptive "never do X" instructions,
+  design-rationale notes, and future-story notes from code snippets. If context
+  is relevant to a reader of the design, write it as prose outside the block.
+- **Describe, don't warn.** State what types, fields, and patterns ARE. Do not
+  preemptively list mistakes the developer might make. If something must be
+  absent (e.g. an AC requires no legacy fields), the verification step asserts
+  it — not the type definition.
 - **Reconcile, don't cherry-pick.** When the OpenAPI spec, the DTOs, and the
   e2e tests disagree, treat the real implementation as ground truth and
   document the drift as a concern.
