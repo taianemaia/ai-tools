@@ -39,7 +39,7 @@ Do not ask for one unless the story itself is ambiguous about scope or patterns.
 
 **Step 1 — Load memory (if available)**
 
-Check `/Users/taiane.g.maia/Documents/Projects/docs/memory/` for repo memory
+Check `/Users/taiane.g.maia/Documents/Projects/la-migra/docs/memory/` for repo memory
 files (e.g. `qvc-nextgen-web.md`, `experience-api.md`). If they exist, read
 them. They capture verified patterns, utility locations, and known issues from
 previous sessions — use them as a starting point to avoid re-discovering the
@@ -58,7 +58,7 @@ For each key package listed in the initiative context:
 - Read its `package.json` (exports map, dependencies, scripts)
 - Read the consuming app's `tsconfig.json` for workspace aliases
 - Read 2–3 existing files of the same type as what this story will produce
-- Read existing tech designs in `/Users/taiane.g.maia/Documents/Projects/docs/tech-designs/`
+- Read existing tech designs in `/Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/`
   that may constrain this story
 
 Do not assert anything about the codebase you have not read directly. If a
@@ -89,7 +89,7 @@ runtime. Always check both sides, regardless of which repo the story targets.
 **Step 3 — Update memory after saving the design**
 
 After Phase 4 (save and hand off), append any newly verified knowledge to the
-relevant memory file in `/Users/taiane.g.maia/Documents/Projects/docs/memory/`:
+relevant memory file in `/Users/taiane.g.maia/Documents/Projects/la-migra/docs/memory/`:
 - Utilities confirmed to exist and their actual import paths/signatures
 - Patterns confirmed as the team standard for this kind of change
 - Package structure discoveries (missing files, unexpected content, stale exports)
@@ -209,16 +209,16 @@ Do not mark Approved until the human explicitly says so.
 After approval:
 
 1. Save the canonical Markdown to:
-   `/Users/taiane.g.maia/Documents/Projects/docs/tech-designs/<JIRA-KEY>-<slug>.md`
-2. Update memory files in `/Users/taiane.g.maia/Documents/Projects/docs/memory/`
+   `/Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/<JIRA-KEY>-<slug>.md`
+2. Update memory files in `/Users/taiane.g.maia/Documents/Projects/la-migra/docs/memory/`
    with any verified repo knowledge discovered during this session (see Phase 0b Step 3).
 3. Tell the human:
 
 ```
-Design saved to /Users/taiane.g.maia/Documents/Projects/docs/tech-designs/[filename].
+Design saved to /Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/[filename].
 
 Hand to plan-auditor:
-  "Audit the design at /Users/taiane.g.maia/Documents/Projects/docs/tech-designs/[filename].
+  "Audit the design at /Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/[filename].
    Initiative context: [path to initiative context file]"
 ```
 
@@ -228,8 +228,8 @@ Hand to plan-auditor:
 
 | Artifact | Location |
 |---|---|
-| Tech designs (all) | `/Users/taiane.g.maia/Documents/Projects/docs/tech-designs/<KEY>-<slug>.md` |
-| Repo memory | `/Users/taiane.g.maia/Documents/Projects/docs/memory/<repo-name>.md` |
+| Tech designs (all) | `/Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/<KEY>-<slug>.md` |
+| Repo memory | `/Users/taiane.g.maia/Documents/Projects/la-migra/docs/memory/<repo-name>.md` |
 | Jira story | `https://qurate.atlassian.net/browse/<KEY>` |
 
 ---

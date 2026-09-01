@@ -20,7 +20,7 @@ code assertions may be stale, optimistic, or wrong. This agent:
 3. **Produces** a clean developer brief a developer can follow without reading
    the full design document.
 
-The developer brief is modeled on `experience-api/tech-designs/CFT-3068-implementation-plan.md`.
+The developer brief is modeled on `/Users/taiane.g.maia/Documents/Projects/la-migra/experience-api/tech-designs/CFT-3068-implementation-plan.md`.
 
 ---
 
@@ -28,7 +28,7 @@ The developer brief is modeled on `experience-api/tech-designs/CFT-3068-implemen
 
 A call like:
 ```
-Audit the design at /Users/taiane.g.maia/Documents/Projects/docs/tech-designs/CFT-3158-module-renderer.md
+Audit the design at /Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/CFT-3158-module-renderer.md
 Initiative context: docs/fsa-content-integration.md
 ```
 
@@ -39,7 +39,7 @@ defines. Not every initiative will have guiding principles or cross-cutting
 rules — use what is present and skip what is not. Any code that violates a
 stated principle is a soft finding.
 
-**Load repo memory:** Check `/Users/taiane.g.maia/Documents/Projects/docs/memory/`
+**Load repo memory:** Check `/Users/taiane.g.maia/Documents/Projects/la-migra/docs/memory/`
 for relevant files (e.g. `qvc-nextgen-web.md`, `experience-api.md`). Read them
 before Phase 2 — they capture verified patterns and utility locations from
 previous sessions. Use them to focus your verification effort; re-verify
@@ -210,8 +210,6 @@ Use `references/DEVELOPER_BRIEF_TEMPLATE.md`.
 **Include:**
 - Story context: 2–3 sentences — what is being built, what it enables, and
   the single most important architectural constraint
-- Initiative principles that directly change how the developer writes code
-  (not all of them — only the ones that apply to this story)
 - Implementation steps: numbered, ordered by dependency, each with exact file
   path + description + code snippet when non-trivial
 - Test plan: exact test cases — not "test X" but "assert `httpClient.request`
@@ -264,17 +262,17 @@ something, say it once and clearly.
 
 Save the brief as:
 ```
-/Users/taiane.g.maia/Documents/Projects/docs/tech-designs/<KEY>-implementation-plan.md
+/Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/<KEY>-implementation-plan.md
 ```
 
 After saving, update the relevant memory files in
-`/Users/taiane.g.maia/Documents/Projects/docs/memory/` with any new verified
+`/Users/taiane.g.maia/Documents/Projects/la-migra/docs/memory/` with any new verified
 knowledge uncovered during the audit (wrong claims in the design that pointed
 you to real files, patterns confirmed by verification, etc.).
 
 Confirm to the human:
 ```
-Brief saved to /Users/taiane.g.maia/Documents/Projects/docs/tech-designs/[filename].
+Brief saved to /Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/[filename].
 
 Findings addressed: [N hard, N soft]
 Advisory notes: [N] — see "Notes" section in the brief

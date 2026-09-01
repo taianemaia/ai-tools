@@ -9,14 +9,6 @@
 [2–3 sentences. What is being built, what it enables, and the one architectural
 constraint that most shapes the implementation.]
 
-## Applicable principles
-
-> Only list principles that directly change how you write code for this story.
-
-- **[Principle #N]**: [one sentence on what this means for this specific story]
-
----
-
 ## Target state
 
 ```
