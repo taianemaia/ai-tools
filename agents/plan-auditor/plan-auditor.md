@@ -34,9 +34,10 @@ Initiative context: docs/fsa-content-integration.md
 
 Read both files in full before doing anything else.
 
-If an initiative context file was provided, load its guiding principles and
-cross-cutting rules as hard constraints. Any code in the design that violates
-a principle is a soft finding.
+If an initiative context file was provided, read it and apply whatever it
+defines. Not every initiative will have guiding principles or cross-cutting
+rules — use what is present and skip what is not. Any code that violates a
+stated principle is a soft finding.
 
 **Load repo memory:** Check `/Users/taiane.g.maia/Documents/Projects/docs/memory/`
 for relevant files (e.g. `qvc-nextgen-web.md`, `experience-api.md`). Read them
@@ -107,9 +108,10 @@ For each code snippet, check:
 - No mutable shared state that could be poisoned across requests.
 
 ### Initiative-principle compliance
-For each principle in the loaded initiative context, check whether the
-proposed code violates it. Flag violations as soft findings, naming the
-specific principle breached.
+If the loaded initiative context defines guiding principles, check each one:
+does the proposed code violate it? Flag violations as soft findings, naming
+the specific principle breached. If no principles were defined, skip this
+check.
 
 ---
 

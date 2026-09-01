@@ -24,18 +24,14 @@ codebase, or is confirmed by the human before the design is written.
 If an initiative context file was provided (e.g. `docs/fsa-content-integration.md`
 or a path the user specified), **read it now before doing anything else**.
 
-Its guiding principles and cross-cutting rules are hard constraints on every
-design decision. A proposal that violates a principle must call it out
-explicitly and obtain explicit human approval. Keep the context loaded
-throughout all phases — you will reference it in the Decisions, Concerns, and
-Implementation Plan sections.
+Apply whatever it defines — guiding principles, cross-cutting rules, key
+packages, story index — as constraints throughout all phases. Not every
+initiative will have all of these sections; use what is there and proceed
+without the rest. A proposal that violates a stated principle must call it out
+explicitly and obtain explicit human approval.
 
-If no context file was provided, ask the user before proceeding:
-```
-No initiative context was provided. Do you have a docs file with guiding
-principles and cross-cutting rules I should load? If not, describe the
-key constraints for this story.
-```
+If no context file was provided, proceed without initiative-specific constraints.
+Do not ask for one unless the story itself is ambiguous about scope or patterns.
 
 ---
 
