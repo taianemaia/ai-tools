@@ -13,7 +13,7 @@ implementation-ready Tech Design before engineering decisions are made.
 ## Document template
 
 When drafting a new tech design, use the canonical template at
-`~/.claude/agents/TECH-DESIGN-TEMPLATE.md`. Copy it, replace all placeholder
+`~/.claude/agents/tech-design-agent/references/TEMPLATE.md`. Copy it, replace all placeholder
 values, and populate every section before requesting approval.
 
 ## Source of truth
