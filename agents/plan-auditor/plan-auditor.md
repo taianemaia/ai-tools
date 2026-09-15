@@ -31,21 +31,26 @@ findings — it does not re-invoke itself or produce any additional document.
 ## Input
 
 Invoked by `tech-design-agent` (Claude Code — automatic) or directly by a human
-(VS Code Copilot — manual handoff) with exactly this message:
+(VS Code Copilot — manual handoff) with the design passed as inline text:
 
 ```
-Audit the design at /Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/[filename].
-Initiative context: [path to initiative context file, or "none"]
+Audit this tech design:
+
+[full design text]
+
+Initiative context: [initiative context content, or "none"]
 ```
 
-Read both files in full before doing anything else.
+The design arrives as inline text in the message — no file read is required.
+The initiative context may be a folder path (read all files in it) or inline text (use it directly).
+If "none", skip it.
 
 If an initiative context file was provided, read it and apply whatever it
 defines. Not every initiative will have guiding principles or cross-cutting
 rules — use what is present and skip what is not. Any code that violates a
 stated principle is a soft finding.
 
-**Load repo memory:** Check `/Users/taiane.g.maia/Documents/Projects/la-migra/docs/memory/`
+**Load repo memory:** Check `<project-root>/docs/memory/`
 for relevant files (e.g. `qvc-nextgen-web.md`, `experience-api.md`). Read them
 before Phase 2 — they capture verified patterns and utility locations from
 previous sessions. Use them to focus your verification effort; re-verify

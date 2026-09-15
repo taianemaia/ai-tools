@@ -70,7 +70,7 @@ runtime. Always check both sides, regardless of which repo the story targets.
 ### Step 3 — Update memory after saving the design
 
 After Phase 5 (hand off), append any newly verified knowledge to the
-relevant memory file in `/Users/taiane.g.maia/Documents/Projects/la-migra/docs/memory/`:
+relevant memory file in `<project-root>/docs/memory/`:
 - Utilities confirmed to exist and their actual import paths/signatures
 - Patterns confirmed as the team standard for this kind of change
 - Package structure discoveries (missing files, unexpected content, stale exports)
@@ -175,35 +175,31 @@ Specific requirements:
 
 ## Phase 3 — Plan-auditor check (automatic, before human review)
 
-After writing the design, **do not present it to the human yet**. Save a draft
-and invoke the plan-auditor first.
+After writing the design, **do not present it to the human yet** and **do not
+save it to disk yet**. Pass the full design text directly to plan-auditor.
 
-**Step 1 — Save the draft**
+**Step 1 — Invoke plan-auditor**
 
-Save the design to:
+Invoke the `plan-auditor` agent with the full design text inline:
+
 ```
-/Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/<JIRA-KEY>-<slug>.md
-```
-Set the design status to `Audit In Progress`.
+Audit this tech design:
 
-**Step 2 — Invoke plan-auditor**
+[paste full design text here]
 
-Invoke the `plan-auditor` agent with exactly this format:
-```
-Audit the design at /Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/[filename].
-Initiative context: [path to initiative context file]
+Initiative context: [file path, or paste content inline, or "none"]
 ```
 
 Plan-auditor returns a structured findings report (HARD / SOFT / NOTE). **You
 own the iteration loop** — plan-auditor only audits and returns; it does not
 re-invoke itself or decide whether to escalate.
 
-**Step 3 — Address findings**
+**Step 2 — Address findings**
 
 - **Zero HARD or SOFT findings** → proceed to Phase 4.
-- **Any HARD or SOFT findings** → apply every fix directly to the saved design
-  file, save it, then re-invoke plan-auditor with the same message. Track the
-  iteration count yourself by counting Revision Log entries in the design.
+- **Any HARD or SOFT findings** → apply every fix to the design in context,
+  then re-invoke plan-auditor with the updated design text. Track the iteration
+  count yourself by counting Revision Log entries in the design.
   - **After 3 iterations with unresolved HARD or SOFT findings**: present the
     findings to the human and halt. Do not proceed to Phase 4 until the human
     resolves them.
@@ -242,27 +238,37 @@ Do not mark Approved until the human explicitly says so.
 
 After human approval:
 
-**Step 1 — Update memory**
+**Step 1 — Save the approved design**
 
-Update memory files in `/Users/taiane.g.maia/Documents/Projects/la-migra/docs/memory/`
+Write the approved design to disk for the first time:
+
+```
+<project-root>/docs/tech-designs/<JIRA-KEY>-<slug>.md
+```
+
+Set the design status to `Approved`.
+
+**Step 2 — Update memory**
+
+Update memory files in `<project-root>/docs/memory/`
 with any verified repo knowledge discovered during this session (see Phase 0b Step 3).
 
-**Step 2 — Produce manual test plan**
+**Step 3 — Produce manual test plan**
 
 Invoke the `manual-test-plan` skill with the approved design's acceptance criteria.
 The skill produces a separate file:
 
 ```
-/Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/<JIRA-KEY>_MANUAL_TEST_PLAN.md
+<project-root>/docs/tech-designs/<JIRA-KEY>_MANUAL_TEST_PLAN.md
 ```
 
 Follow the skill's output-format instructions. Do not merge it into the design file.
 
-**Step 3 — Confirm to the human**
+**Step 4 — Confirm to the human**
 
 ```
-Design approved:    /Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/[filename].md
-Manual test plan:   /Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/[filename]_MANUAL_TEST_PLAN.md
+Design approved:    <project-root>/docs/tech-designs/[filename].md
+Manual test plan:   <project-root>/docs/tech-designs/[filename]_MANUAL_TEST_PLAN.md
 
 Ready for implementation: yes
 ```
@@ -277,30 +283,38 @@ design document — no separate file is produced.
 > Agent-to-agent invocation is automatic in Claude Code. In VS Code Copilot, it
 > requires a manual step between phases.
 
-After saving the draft design in Phase 3 Step 1, copy and paste the following message
-into a **new chat with `@plan-auditor`** — replacing the bracketed values:
+After writing the design in Phase 2, open a **new chat with `@plan-auditor`** and
+send the design as inline text:
 
 ```
-Audit the design at /Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/[filename].
-Initiative context: [path to initiative context file, or "none"]
+Audit this tech design:
+
+[paste the full design text here]
+
+Initiative context: [file path, or paste content inline, or "none"]
 ```
 
 When `plan-auditor` returns its findings report:
 
-- **`Status: CLEAN`** — return to this agent (tech-design-agent) to continue with Phase 4.
-- **`Status: MUST FIX`** — apply every HARD and SOFT finding to the design file, save it, then
-  repeat the audit message above. Track iterations yourself by counting Revision Log entries.
+- **`Status: CLEAN`** — return to `@tech-design-agent` to continue with Phase 4.
+- **`Status: MUST FIX`** — apply every HARD and SOFT finding to the design text,
+  then send the updated design to `@plan-auditor` again using the same format.
+  Track iterations by counting Revision Log entries in the design.
   After 3 iterations with unresolved findings, present them to the human and halt.
 
 ---
 
 ## Source of truth
 
+> `<project-root>` is the root of the target repository. Discover it from the
+> context provided with the request (repo path, open file, or working directory).
+> Ask the human if it cannot be determined from context.
+
 | Artifact | Location |
 |---|---|
-| Tech designs (all) | `/Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/<KEY>-<slug>.md` |
-| Repo memory | `/Users/taiane.g.maia/Documents/Projects/la-migra/docs/memory/<repo-name>.md` |
-| Jira story | `https://qurate.atlassian.net/browse/<KEY>` |
+| Tech designs (all) | `<project-root>/docs/tech-designs/<KEY>-<slug>.md` |
+| Repo memory | `<project-root>/docs/memory/<repo-name>.md` |
+| Jira story | Provided with the request or readable from context |
 
 ---
 
