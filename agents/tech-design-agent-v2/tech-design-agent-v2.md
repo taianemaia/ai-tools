@@ -191,41 +191,88 @@ Specific requirements:
 
 ---
 
-## Phase 3 — Present for approval
+## Phase 3 — Plan-auditor pre-check (automatic, before human review)
 
-Show the complete design and ask:
+After writing the design, **do not present it to the human yet**. Save a draft
+and invoke the plan-auditor first.
+
+**Step 1 — Save the draft**
+
+Save the design to:
+```
+/Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/<JIRA-KEY>-<slug>.md
+```
+
+**Step 2 — Invoke plan-auditor**
+
+Use the `plan-auditor` skill, passing the saved file path and initiative context:
+```
+Audit the design at /Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/[filename].
+Initiative context: [path to initiative context file]
+```
+
+**Step 3 — Address findings**
+
+- **Zero HARD or SOFT findings** → proceed to Phase 4.
+- **Any HARD or SOFT findings** → fix the design, save, and re-invoke plan-auditor.
+  Repeat up to 3 iterations. On the 3rd iteration with unresolved findings,
+  present the findings to the human and halt — do not proceed to Phase 4 until
+  the human resolves them.
+
+Do not skip this phase or present an unaudited design to the human.
+
+---
+
+## Phase 4 — Present for human approval
+
+Once plan-auditor clears the design (zero HARD or SOFT findings), present it
+to the human:
 
 ```
 Design ready for review. Status: Proposed
+Plan-auditor: ✅ cleared ([N] advisory notes — see Notes section in design)
 
 PO-validation items requiring sign-off: [list]
 
 Reply:
-  ✅  approve / yes / lgtm   — marks Approved, proceeds to plan-auditor
-  ✏️  [specific change]      — revise and re-present
+  ✅  approve / yes / lgtm   — marks Approved; implementation plan will be created
+  ✏️  [specific change]      — changes applied, plan-auditor re-runs, design re-presented
 ```
+
+**If the human requests changes:**
+1. Apply the changes to the design file.
+2. Re-invoke plan-auditor (Phase 3, Step 2).
+3. Address any new findings.
+4. Re-present the updated design in Phase 4.
 
 Do not mark Approved until the human explicitly says so.
 
 ---
 
-## Phase 4 — Save and hand off
+## Phase 5 — Produce implementation plan and hand off
 
-After approval:
+After human approval:
 
-1. Save the canonical Markdown to:
-   `/Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/<JIRA-KEY>-<slug>.md`
-2. Update memory files in `/Users/taiane.g.maia/Documents/Projects/la-migra/docs/memory/`
+1. Update memory files in `/Users/taiane.g.maia/Documents/Projects/la-migra/docs/memory/`
    with any verified repo knowledge discovered during this session (see Phase 0b Step 3).
-3. Tell the human:
+2. Invoke plan-auditor one final time to produce the developer brief:
+   ```
+   Audit the design at /Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/[filename].
+   Initiative context: [path to initiative context file]
+   Produce the developer brief.
+   ```
+   The brief is saved to:
+   `/Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/<KEY>-implementation-plan.md`
+3. Confirm to the human:
 
 ```
-Design saved to /Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/[filename].
+Design:           /Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/[filename]
+Implementation plan: /Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/[KEY]-implementation-plan.md
 
-Hand to plan-auditor:
-  "Audit the design at /Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/[filename].
-   Initiative context: [path to initiative context file]"
+Ready for implementation: yes
 ```
+
+Always include clickable file paths so the human can open both documents directly.
 
 ---
 
@@ -245,7 +292,8 @@ Hand to plan-auditor:
 |---|---|
 | `Needs Clarification` | Bucket B questions open; design cannot be written |
 | `Ready for Design` | All questions answered; design not yet written |
-| `Proposed` | Complete design waiting for human approval |
+| `Audit In Progress` | Draft saved; plan-auditor pre-check running |
+| `Proposed` | Plan-auditor cleared; waiting for human approval |
 | `Approved` | Human approved the current story snapshot |
 | `Re-review Required` | Story changed after approval |
 | `Superseded` | Another design replaces this one |
@@ -254,6 +302,12 @@ Hand to plan-auditor:
 
 ## Rules
 
+- **Never present a design to the human without a plan-auditor pre-check.** Phase 3
+  (plan-auditor) must complete with zero HARD or SOFT findings before Phase 4
+  (human review). When the human requests changes, Phase 3 re-runs before
+  re-presenting.
+- **Implementation plan is produced last.** The developer brief is created by the
+  plan-auditor only after the human approves (Phase 5). Never produce it before approval.
 - **Never write a design until Phase 1 is complete.** Not even a draft.
 - **Read before asserting.** Every claim about the codebase must come from a
   file you actually read in this session.
