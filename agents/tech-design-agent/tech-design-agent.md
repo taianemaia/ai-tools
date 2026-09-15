@@ -6,6 +6,7 @@ description: >
   human before writing anything — nothing is assumed. Use when asked to create
   or draft a tech design for a standalone user story or a user story that is part 
   of an initiative.
+model: claude-sonnet-4-6
 ---
 
 # Tech Design Agent

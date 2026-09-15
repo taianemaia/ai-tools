@@ -8,6 +8,7 @@ description: >
   findings to tech-design-agent, which owns the iteration loop (up to 3 cycles
   before escalating to the human). Use after a design draft is saved and before
   it is presented to the human for approval.
+model: gpt-5.6-terra
 ---
 
 # Plan Auditor
