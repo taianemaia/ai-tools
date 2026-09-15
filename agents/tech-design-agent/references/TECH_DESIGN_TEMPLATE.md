@@ -1,12 +1,10 @@
-# STORY-KEY or STORY-SHORT-DESCRIPTION Tech Design - Story summary
-
+# [STORY-KEY] — [Story short description] — Tech Design
 
 ## Instructions for humans
 
 - Resolve every blocking question before approval.
 - Confirm assumptions, ownership, sequencing, and rollout expectations.
-- Approve only when this design matches the current Jira story and acceptance
-  criteria.
+- Approve only when this design matches the current Jira story and acceptance criteria.
 - If the story changes, set the status to `Re-review Required`.
 
 ## Instructions for agents
@@ -17,18 +15,22 @@
 - Stop and raise conflicts between this design, the story, and the code.
 - Do not silently expand scope or change an approved decision.
 
+---
 
-## Assumptions for PO validation
+## Proposed design
 
-List every product, UX, scope, ordering, ownership, or trade-off question raised during discovery, including questions the PO answered. This section belongs near the top of every design so a PO can validate the decisions before approval. Do not hide a material unanswered question elsewhere in the document.
-
-| ID | PO-validation question | Proposed or confirmed assumption | Consequence if changed |
-|---|---|---|---|
-| PO1 | Question raised during discovery | Answer, proposed default, or `Unresolved` | Affected scope, contract, or behavior |
+High-level proposed design and components to be created or updated.
 
 ## Story summary
 
 Describe the user, need, outcome, business value, and boundaries.
+
+## Assumptions for human validation
+
+| ID | human-validation question | Proposed or confirmed assumption | Consequence if changed |
+|---|---|---|---|
+| Q1 | Question raised during discovery | Answer, proposed default, or `Unresolved` | Affected scope, contract, or behavior |
+
 
 ## Scope
 
@@ -60,16 +62,6 @@ Describe the user, need, outcome, business value, and boundaries.
 
 - None.
 
-## Technical assumptions
-
-| ID | Assumption | Owner | Validation required by |
-|---|---|---|---|
-| A1 | Assumption | Name/team | Date or milestone |
-
-## Proposed design
-
-Describe the end-to-end behavior, component responsibilities, boundaries,
-contracts, and key flows.
 
 ## Decisions and alternatives
 
@@ -77,20 +69,7 @@ contracts, and key flows.
 |---|---|---|---|
 | D1 | Choice | Alternatives | Consequences |
 
-
-### Test strategy
-
-Map unit, integration, contract, end-to-end, performance, security, and
-acceptance verification to the affected behavior.
-
-### Rollout and rollback
-
-Describe sequencing, feature flags, compatibility, migration, monitoring,
-rollback triggers, and recovery.
-
-## Dependencies and implementation sequence
-
-1. Dependency or implementation step.
+---
 
 ## Implementation plan
 
@@ -99,11 +78,13 @@ rollback triggers, and recovery.
 > verified before inclusion. Code snippets must compile given the types
 > and utilities actually available in the repo.
 
+> **Note for developers:** The guide below is intended to be used as an accelerator. You are still responsible for reviewing and raising questions or concerns if any.
+
 ### File manifest
 
 ```
 [repo-root]/
-  [path/to/file]      NEW — [purpose in one line]
+  [path/to/file]      NEW    — [purpose in one line]
   [path/to/file]      MODIFY — [what changes]
   [path/to/file]      DELETE — [why]
 ```
@@ -116,11 +97,13 @@ Follow in order. Each step is independently verifiable.
 
 **File:** `[exact/path/to/file.ts]` *(new | modify)*
 
-[One sentence describing what this step does and why.]
+[One sentence describing what this step does and why — do not repeat what was already said above; look ahead to what this step enables.]
 
 ```typescript
 // [relevant code for this step]
 ```
+
+---
 
 #### Step 2 — [Short verb phrase]
 
@@ -132,20 +115,14 @@ Follow in order. Each step is independently verifiable.
 // code
 ```
 
+---
+
 *(Add a step for each discrete change. Steps must be ordered by dependency.)*
 
-### Verify
-
-```bash
-# commands to confirm everything compiles, lints, and tests pass
-yarn workspace @nextjs-qvc-digital/[package] run check-types
-yarn workspace @nextjs-qvc-digital/[package] run test
-yarn lint
-```
 
 ## Acceptance-criteria traceability
 
-| AC | Components | Implementation tasks | Verification |
+| AC | Components | Implementation steps | Verification |
 |---|---|---|---|
-| AC1 | Components | Tasks | Tests/checks |
+| AC1 | Components | Step N | Tests/checks |
 

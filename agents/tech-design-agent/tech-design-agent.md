@@ -37,7 +37,7 @@ If repository memory or agent-maintained documentation is available, review the 
 
 Treat memory as a starting point, not as ground truth. Verify any information that materially affects the design against the current codebase, tests, configuration, or authoritative documentation before relying on it.
 
-**Step 2 — Review relevant codebase context
+### Step 2 — Review relevant codebase context
 
 Use the supplied context and user story to identify the relevant repositories, packages, and applications. Do not rely on agent-specific or hardcoded paths.
 
@@ -45,7 +45,7 @@ For each relevant area, review the configuration, dependencies, conventions, and
 
 Only make claims supported by the material reviewed. If an expected file, package, or implementation is missing, record it as a potential gap or design consideration.
 
-**Step 2b — Cross-repo contract reconciliation**
+### Step 2b — Cross-repo contract reconciliation
 
 Both repos share a data contract. Misalignment between them is the most
 dangerous class of error because it compiles cleanly and fails silently at
@@ -66,7 +66,7 @@ runtime. Always check both sides, regardless of which repo the story targets.
   treat the DTOs + e2e evidence as ground truth. Record the drift as a
   concern so the design is honest about what the frontend will actually receive.
 
-**Step 3 — Update memory after saving the design**
+### Step 3 — Update memory after saving the design
 
 After Phase 5 (hand off), append any newly verified knowledge to the
 relevant memory file in `/Users/taiane.g.maia/Documents/Projects/la-migra/docs/memory/`:
@@ -139,7 +139,7 @@ Set the design status to `Needs Clarification` until all answers are in.
 ## Phase 2 — Write the design
 
 Only after every Bucket B question is answered, write the full design using
-the template at `references/TEMPLATE.md`.
+the template at `references/TECH_DESIGN_TEMPLATE.md`.
 
 **Research depth required:**
 
@@ -162,7 +162,7 @@ Specific requirements:
 
 - **Implementation Plan section** (required): numbered steps a developer can
   follow in order. Each step names the exact file, briefly states what changes, and
-  includes a code snippet. See `references/TEMPLATE.md` for the section format.
+  includes a code snippet. See `references/TECH_DESIGN_TEMPLATE.md` for the section format.
 
 - **AC traceability table**: every acceptance criterion must map to at least
   one implementation step and one test case. No AC can be untraced.
@@ -241,18 +241,55 @@ Do not mark Approved until the human explicitly says so.
 
 After human approval:
 
-1. Update memory files in `/Users/taiane.g.maia/Documents/Projects/la-migra/docs/memory/`
-   with any verified repo knowledge discovered during this session (see Phase 0b Step 3).
-2. Confirm to the human:
+**Step 1 — Update memory**
+
+Update memory files in `/Users/taiane.g.maia/Documents/Projects/la-migra/docs/memory/`
+with any verified repo knowledge discovered during this session (see Phase 0b Step 3).
+
+**Step 2 — Produce manual test plan**
+
+Invoke the `manual-test-plan` skill with the approved design's acceptance criteria.
+The skill produces a separate file:
 
 ```
-Design approved: /Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/[filename]
+/Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/<JIRA-KEY>_MANUAL_TEST_PLAN.md
+```
+
+Follow the skill's output-format instructions. Do not merge it into the design file.
+
+**Step 3 — Confirm to the human**
+
+```
+Design approved:    /Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/[filename].md
+Manual test plan:   /Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/[filename]_MANUAL_TEST_PLAN.md
 
 Ready for implementation: yes
 ```
 
 The implementation plan is the **Implementation Plan section** inside the approved
 design document — no separate file is produced.
+
+---
+
+## VS Code Copilot — Manual handoff to plan-auditor
+
+> Agent-to-agent invocation is automatic in Claude Code. In VS Code Copilot, it
+> requires a manual step between phases.
+
+After saving the draft design in Phase 3 Step 1, copy and paste the following message
+into a **new chat with `@plan-auditor`** — replacing the bracketed values:
+
+```
+Audit the design at /Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/[filename].
+Initiative context: [path to initiative context file, or "none"]
+```
+
+When `plan-auditor` returns its findings report:
+
+- **`Status: CLEAN`** — return to this agent (tech-design-agent) to continue with Phase 4.
+- **`Status: MUST FIX`** — apply every HARD and SOFT finding to the design file, save it, then
+  repeat the audit message above. Track iterations yourself by counting Revision Log entries.
+  After 3 iterations with unresolved findings, present them to the human and halt.
 
 ---
 
@@ -313,4 +350,3 @@ design document — no separate file is produced.
   belongs to a different story, do not silently drop it. Record it in the
   AC traceability table with status `Out of scope — belongs to [KEY]` and
   include a note in the design explaining why, who confirmed it, and when.
-  The plan-auditor will carry this flag into the developer brief.

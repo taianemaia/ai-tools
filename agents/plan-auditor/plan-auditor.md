@@ -29,10 +29,12 @@ findings — it does not re-invoke itself or produce any additional document.
 
 ## Input
 
-Invoked by `tech-design-agent` with:
+Invoked by `tech-design-agent` (Claude Code — automatic) or directly by a human
+(VS Code Copilot — manual handoff) with exactly this message:
+
 ```
 Audit the design at /Users/taiane.g.maia/Documents/Projects/la-migra/docs/tech-designs/[filename].
-Initiative context: [path to initiative context file]
+Initiative context: [path to initiative context file, or "none"]
 ```
 
 Read both files in full before doing anything else.
@@ -208,6 +210,11 @@ iteration with the same unresolved findings, add to the summary:
 ```
 Iteration limit reached — human decision required before proceeding.
 ```
+
+> **VS Code Copilot:** After returning this report, stop. The human will:
+> - Apply HARD and SOFT findings to the design file, then re-invoke you with the same message, OR
+> - Return to `@tech-design-agent` if the status is CLEAN.
+> You do not re-invoke yourself or continue the loop.
 
 ---
 
