@@ -13,8 +13,8 @@ DRY_RUN=false
 REPO_ROOT="$(cd "$(dirname "$0")" && pwd)"
 CLAUDE_DIR="$HOME/.claude"
 
-# VS Code user prompts dir — where .agent.md files live (user-level, all workspaces)
-VSCODE_PROMPTS_DIR="$HOME/Library/Application Support/Code/User/prompts"
+# VS Code Copilot user agents dir — global, available in all workspaces
+VSCODE_PROMPTS_DIR="$HOME/.copilot/agents"
 
 # ── helpers ──────────────────────────────────────────────────────────────────
 
@@ -57,21 +57,14 @@ link_subdirs() {
     done
 }
 
-# ── VS Code Copilot: copy main .md as <name>.agent.md ────────────────────────
+# ── VS Code Copilot: copy main .md as <name>.agent.md into flat agents dir ───
 
 sync_vscode_agents() {
     local src_root="$1"
     local dst_dir="$2"
 
     [[ -d "$src_root" ]] || return 0
-
-    if [[ ! -d "$dst_dir" ]]; then
-        if $DRY_RUN; then
-            info "?" "Would create: $dst_dir"
-        else
-            mkdir -p "$dst_dir"
-        fi
-    fi
+    run mkdir -p "$dst_dir"
 
     for src in "$src_root"/*/; do
         [[ -d "$src" ]] || continue
@@ -83,10 +76,35 @@ sync_vscode_agents() {
         [[ -f "$src_md" ]] || continue   # skip agents with no matching .md file
 
         if $DRY_RUN; then
-            info "?" "Would write (VS Code): $name.agent.md"
+            info "?" "Would write (VS Code agents): $name.agent.md"
         else
             cp "$src_md" "$dst"
-            info "+" "Copied (VS Code): $name.agent.md"
+            info "+" "Copied (VS Code agents): $name.agent.md"
+        fi
+    done
+}
+
+# ── VS Code Copilot: copy each skill dir to ~/.copilot/skills/<name>/ ────────
+
+sync_vscode_skills() {
+    local src_root="$1"
+    local dst_root="$2"
+
+    [[ -d "$src_root" ]] || return 0
+    run mkdir -p "$dst_root"
+
+    for src in "$src_root"/*/; do
+        [[ -d "$src" ]] || continue
+        local name dst
+        name="$(basename "$src")"
+        dst="$dst_root/$name"
+
+        if $DRY_RUN; then
+            info "?" "Would copy (VS Code skills): $name/"
+        else
+            rm -rf "$dst"
+            cp -r "$src" "$dst"
+            info "+" "Copied (VS Code skills): $name/"
         fi
     done
 }
@@ -100,6 +118,7 @@ link_subdirs "$REPO_ROOT/skills" "$CLAUDE_DIR/skills"
 echo ""
 echo "VS Code Copilot"
 sync_vscode_agents "$REPO_ROOT/agents" "$VSCODE_PROMPTS_DIR"
+sync_vscode_skills "$REPO_ROOT/skills" "$HOME/.copilot/skills"
 
 if $DRY_RUN; then
     echo -e "\nDry run complete — nothing was changed."

@@ -17,8 +17,8 @@ $ErrorActionPreference = "Stop"
 
 $repoRoot        = $PSScriptRoot
 $claudeDir       = Join-Path $env:USERPROFILE ".claude"
-# VS Code user prompts dir — where .agent.md files live (user-level, all workspaces)
-$vsCodePromptsDir = Join-Path $env:APPDATA "Code\User\prompts"
+# VS Code Copilot user agents dir — global, available in all workspaces
+$vsCodePromptsDir = Join-Path $env:USERPROFILE ".copilot\agents"
 
 function Write-Status($symbol, $color, $message) {
     Write-Host "  $symbol  $message" -ForegroundColor $color
@@ -60,28 +60,45 @@ function Sync-ClaudeLinks($srcRoot, $dstRoot) {
     }
 }
 
-# ── VS Code Copilot: copy main .md as <name>.agent.md ────────────────────────
+# ── VS Code Copilot: copy main .md as <name>.agent.md into flat agents dir ───
 
 function Sync-VSCodeAgents($srcRoot, $dstDir) {
     if (-not (Test-Path $srcRoot)) { return }
-
-    if (-not (Test-Path $dstDir)) {
-        if ($DryRun) { Write-Status "?" Cyan "Would create: $dstDir" }
-        else { New-Item -ItemType Directory -Path $dstDir -Force | Out-Null }
-    }
+    if (-not $DryRun) { New-Item -ItemType Directory -Path $dstDir -Force | Out-Null }
 
     Get-ChildItem -Path $srcRoot -Directory | ForEach-Object {
-        $name   = $_.Name
-        $srcMd  = Join-Path $_.FullName "$name.md"
-        $dstMd  = Join-Path $dstDir "$name.agent.md"
+        $name  = $_.Name
+        $srcMd = Join-Path $_.FullName "$name.md"
+        $dstMd = Join-Path $dstDir "$name.agent.md"
 
         if (-not (Test-Path $srcMd)) { return }   # skip agents with no matching .md file
 
         if ($DryRun) {
-            Write-Status "?" Cyan "Would write (VS Code): $name.agent.md"
+            Write-Status "?" Cyan "Would write (VS Code agents): $name.agent.md"
         } else {
             Copy-Item -Path $srcMd -Destination $dstMd -Force
-            Write-Status "+" Green "Copied (VS Code): $name.agent.md"
+            Write-Status "+" Green "Copied (VS Code agents): $name.agent.md"
+        }
+    }
+}
+
+# ── VS Code Copilot: copy each skill dir to %USERPROFILE%\.copilot\skills\<name>\ ──
+
+function Sync-VSCodeSkills($srcRoot, $dstRoot) {
+    if (-not (Test-Path $srcRoot)) { return }
+    if (-not $DryRun) { New-Item -ItemType Directory -Path $dstRoot -Force | Out-Null }
+
+    Get-ChildItem -Path $srcRoot -Directory | ForEach-Object {
+        $name   = $_.Name
+        $srcDir = $_.FullName
+        $dstDir = Join-Path $dstRoot $name
+
+        if ($DryRun) {
+            Write-Status "?" Cyan "Would copy (VS Code skills): $name/"
+        } else {
+            if (Test-Path $dstDir) { Remove-Item $dstDir -Recurse -Force }
+            Copy-Item -Path $srcDir -Destination $dstDir -Recurse -Force
+            Write-Status "+" Green "Copied (VS Code skills): $name/"
         }
     }
 }
@@ -95,6 +112,7 @@ Sync-ClaudeLinks (Join-Path $repoRoot "skills") (Join-Path $claudeDir "skills")
 Write-Host ""
 Write-Host "VS Code Copilot" -ForegroundColor White
 Sync-VSCodeAgents (Join-Path $repoRoot "agents") $vsCodePromptsDir
+Sync-VSCodeSkills (Join-Path $repoRoot "skills") (Join-Path $env:USERPROFILE ".copilot\skills")
 
 if ($DryRun) {
     Write-Host "`nDry run complete — nothing was changed." -ForegroundColor Cyan
